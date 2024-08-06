@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
+  
   // 处理预检请求
   if (req.method === 'OPTIONS') {
     res.status(200).end();
@@ -13,7 +13,38 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'POST') {
-    const customerData = req.body;
+    const customerData = JSON.stringify({
+      'customer': {
+        'first_name': 'Steve',
+        'last_name': 'Lastnameson',
+        'email': 'steve.lastnameson@example.com',
+        'phone': '+15142546011',
+        'verified_email': true,
+        'addresses': [
+          {
+            'address1': '123 Oak St',
+            'city': 'Ottawa',
+            'province': 'ON',
+            'phone': '555-1212',
+            'zip': '123 ABC',
+            'last_name': 'Lastnameson',
+            'first_name': 'Mother',
+            'country': 'CA'
+          }
+        ],
+        'metafields': [
+          {
+            'namespace': 'custom',
+            'key': 'Whatsapp',
+            'value': '+15142546011',
+            'value_type': 'string'
+          }
+        ],
+        'password': 'newpass',
+        'password_confirmation': 'newpass',
+        'send_email_welcome': false
+      }
+    });
 
     try {
       const shopifyResponse = await fetch('https://156e1b-51.myshopify.com/admin/api/2024-07/customers.json', {

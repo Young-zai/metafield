@@ -23,7 +23,7 @@ export default async function handler(req, res) {
         },
         body: JSON.stringify(customerData)
       });
-
+      console.log(process.env.access_key)
       const data = await shopifyResponse.json();
 
       if (!shopifyResponse.ok) {

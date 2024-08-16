@@ -18,7 +18,7 @@ export default async function handler(req, res) {
       const shopifyResponse = await fetch(`https://${process.env.store}/admin/api/2024-07/customers.json`, {
         method: 'POST',
         headers: {
-          'X-Shopify-Access-Token': process.env.SHOPIFY_ACCESS_TOKEN,
+          'X-Shopify-Access-Token': process.env.access_key,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(customerData)
